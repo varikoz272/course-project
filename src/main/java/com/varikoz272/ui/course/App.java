@@ -4,11 +4,11 @@ import javax.swing.JFrame;
 
 import com.varikoz272.ui.course.component.NiceButton;
 import com.varikoz272.ui.course.component.NiceTextField;
+import com.varikoz272.ui.course.form.LoginForm;
 
 public class App {
     public static void main(String[] args) {
-        initJFrame();
-
+        new LoginForm();
     }
 
     public static void initJFrame() {
@@ -26,8 +26,7 @@ public class App {
         b1.setBounds(100, 150, 100, 100);
         f.add(b1);
 
-        NiceTextField t = new NiceTextField();
-        t.setBounds(200, 250, 150, 40);
+        NiceTextField t = new NiceTextField(200, 250);
         f.add(t);
 
         f.setVisible(true);

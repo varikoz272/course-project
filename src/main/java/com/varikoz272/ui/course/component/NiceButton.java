@@ -3,6 +3,7 @@ package com.varikoz272.ui.course.component;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,8 +24,21 @@ public class NiceButton extends JButton {
     private boolean isPressed;
     private boolean isEntered;
 
-    public NiceButton(String message) {
+    public NiceButton(String message, int x, int y, NiceButtonSize size) {
+        this(message, x, y, getSizeFromType(size).width, getSizeFromType(size).height);
+    }
+
+    public NiceButton(int x, int y, NiceButtonSize size) {
+        this(x, y, getSizeFromType(size).width, getSizeFromType(size).height);
+    }
+
+    public NiceButton(int x, int y, int width, int height) {
+        this("", x, y, width, height);
+    }
+
+    public NiceButton(String message, int x, int y, int width, int height) {
         setText(message);
+        setBounds(x, y, width, height);
         setContentAreaFilled(false);
         setForeground(Color.WHITE);
         setBackground(new Color(0x4DC7FF));
@@ -83,5 +97,30 @@ public class NiceButton extends JButton {
 
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight() - 5, getHeight(), getHeight());
+    }
+
+    public static Dimension getDefaultSize() {
+        return new Dimension(100, 100);
+    }
+
+    public static Dimension getDefaultFlatSize() {
+        return new Dimension(100, 150);
+    }
+
+    public static Dimension getSizeFromType(NiceButtonSize size) {
+        switch (size) {
+            case Round:
+                return getDefaultSize();
+
+            case Flat:
+                return getDefaultFlatSize();
+        }
+
+        return null;
+    }
+
+    public static enum NiceButtonSize {
+        Round,
+        Flat,
     }
 }
